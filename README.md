@@ -27,4 +27,6 @@ After finding, we will return the location of every note, but here i just draw a
 Some footage of the result:
 ![Screenshot 2022-07-27 155907](https://user-images.githubusercontent.com/102981020/181206930-3e8b13ce-9e90-446a-adf3-0a3aeb242c6b.png)
 
+![Screenshot 2022-07-27 160152](https://user-images.githubusercontent.com/102981020/181208049-a376ab3f-f75d-46ac-a26c-ddbf62b2e047.png)
+
 And beside, i also code to find the location of bass clef and trebel clef, in order to skip it when reading the bar
