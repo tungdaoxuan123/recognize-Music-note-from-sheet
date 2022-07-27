@@ -126,14 +126,24 @@ def inLineChecker(img,x,y):
                 if blackNote:
                     cv2.circle(img,(x-int(blackDetector/2),y), 1, (255,255,255), -1)
             elif blackDetector!=0:
-                whiteNote.append([y,x- int(blackDetector/2)])
+                isTail = True
+                isHalfBNote = 0
+                for i in range (0,int(img.shape[0]/9/2)):
+                    if img[y+i,x- int(blackDetector/2)-1] != 0 or img[y-i,x- int(blackDetector/2)-1] != 0:
+                        isTail = False
+                if isTail:
+                    blackDetector = 0
+                    x+= int(noteSize)-1
+                    continue
+                else:
+                    whiteNote.append([y,x- int(blackDetector/2)])
             blackDetector = 0
 
         x+=1
     for i in range(1,len(whiteNote)):
         print(whiteNote[i])
         dist = distance(whiteNote[i],whiteNote[i-1])
-        if dist > noteSize*1.3 and dist < noteSize*2 * 1.3:
+        if dist > noteSize*1.3 and dist < noteSize*2 * 1.1:
             cv2.circle(img,(int((whiteNote[i][1]+whiteNote[i-1][1])/2),whiteNote[i][0]), 1, (255,255,255), -1)
 
 def drawCheckLine(img):
@@ -148,7 +158,6 @@ def inLineCheck(img):
     start = int(img.shape[0]/9)
     for i in range(0,8):
         inLineChecker(img,clef,start + i*step)
-        cv2.circle(img,(clef,start+step* i), 4, (0,0,0), -1)
     return
 
 for i in cropped:
